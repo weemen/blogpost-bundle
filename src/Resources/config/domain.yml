@@ -1,0 +1,42 @@
+services:
+    weemen.blogpost.command_handler:
+        class: Weemen\BlogPost\Application\BlogPostCommandHandler
+        arguments: [@weemen.blogpost.repository, @broadway.uuid.generator]
+        tags:
+            - { name: command_handler }
+
+    weemen.blogpost.repository:
+        class: Weemen\BlogPost\Domain\BlogPost\BlogPostRepository
+        arguments:
+            - @broadway.event_store
+            - @broadway.event_handling.event_bus
+            - [ @broadway.metadata_enriching_event_stream_decorator ]
+
+#    weemen.read_model.repository.blogpost:
+#        class: Broadway\ReadModel\ReadModel
+#        factory: ["@broadway.read_model.repository_factory", create]
+#        arguments: ['blogposts_published', 'Weemen\BlogPost\ReadModel\BlogPostsPublished']
+
+# broadway.elasticsearch.client
+# broadway.serializer.readmodel
+    weemen.read_model.repository.blogpost:
+            class: Weemen\ElasticsearchRepository\ReadModel\ElasticsearchRepository
+            arguments: [@broadway.elasticsearch.client, @broadway.serializer.readmodel, 'blogposts_published', 'Weemen\BlogPost\ReadModel\BlogPostsPublished']
+
+    weemen.read_model.projector.blogpost:
+        class: Weemen\BlogPost\ReadModel\BlogPostsPublishedProjector
+        arguments: [@weemen.read_model.repository.blogpost]
+        tags:
+            - { name: broadway.domain.event_listener }
+            - { name: projector.replayable, repository: weemen.read_model.repository.blogpost }
+
+    weemen.read_model.repository.blogpost.published.slugs:
+        class: Weemen\ElasticsearchRepository\ReadModel\ElasticsearchRepository
+        arguments: [@broadway.elasticsearch.client, @broadway.serializer.readmodel, 'blogpost_published', 'Weemen\BlogPost\ReadModel\BlogPostsPublishedSlugs']
+
+    weemen.read_model.projector.blogpost.published.slugs:
+        class: Weemen\BlogPost\ReadModel\BlogPostsPublishedSlugsProjector
+        arguments: [@weemen.read_model.repository.blogpost.published.slugs]
+        tags:
+            - { name: broadway.domain.event_listener }
+            - { name: projector.replayable, repository: weemen.read_model.repository.blogpost.published.slugs }

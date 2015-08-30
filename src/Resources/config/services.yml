@@ -1,0 +1,4 @@
+services:
+    weemen.blogpost.controller.application:
+        class: Weemen\BlogPostBundle\Controller\BlogPostController
+        arguments: ["@broadway.command_handling.command_bus", "@broadway.uuid.generator", "@form.factory", "@router", "@weemen.read_model.repository.blogpost"]
