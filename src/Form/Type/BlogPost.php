@@ -36,13 +36,16 @@ class BlogPost extends AbstractType
             ))
             ->add('published', 'checkbox', array(
                 'constraints' => array(
-                    new IsFalse(),
                 ),
             ))
             ->add('source', 'text', array(
                 'constraints' => array(
                     new NotBlank(),
                     new Length(array('min' => 1)),
+                ),
+            ))
+            ->add('publishDate', 'text', array(
+                'constraints' => array(
                 ),
             ));
     }

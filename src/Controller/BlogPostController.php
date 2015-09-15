@@ -107,7 +107,7 @@ class BlogPostController extends FOSRestController
         $command->author     = $request->request->get('author');
         $command->published  = (bool) $request->request->get('published');
         $command->source     = $request->request->get('source');
-
+        $command->publishDate = $request->request->get('publishDate');
         $form                = $this->formFactory->create(new BlogPostType(),$command);
 
         return $this->handleForm($request, $form, $blogPostId, $command);
