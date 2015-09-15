@@ -2353,7 +2353,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simgroep/event-sourcing/zipball/ba1d1028a1974fdda4c65e9b82b827452f1fb2b2",
+                "url": "https://api.github.com/repos/simgroep/event-sourcing/zipball/dbadb702f3261605332870823dffe99de207ae3f",
                 "reference": "ba1d1028a1974fdda4c65e9b82b827452f1fb2b2",
                 "shasum": ""
             },
@@ -2579,12 +2579,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/weemen/blogpost-domain.git",
-                "reference": "4d17b776319b51edcf12f359a00619289b0097a0"
+                "reference": "689ecd410d1de7c17e5054268af20a38c29978cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/weemen/blogpost-domain/zipball/4d17b776319b51edcf12f359a00619289b0097a0",
-                "reference": "4d17b776319b51edcf12f359a00619289b0097a0",
+                "url": "https://api.github.com/repos/weemen/blogpost-domain/zipball/689ecd410d1de7c17e5054268af20a38c29978cf",
+                "reference": "689ecd410d1de7c17e5054268af20a38c29978cf",
                 "shasum": ""
             },
             "require": {
@@ -2614,7 +2614,7 @@
                 "source": "https://github.com/weemen/blogpost-domain/tree/master",
                 "issues": "https://github.com/weemen/blogpost-domain/issues"
             },
-            "time": "2015-09-09 19:00:02"
+            "time": "2015-09-09 22:33:01"
         },
         {
             "name": "weemen/elasticsearch-repository",
