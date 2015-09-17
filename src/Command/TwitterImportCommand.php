@@ -82,7 +82,7 @@ class TwitterImportCommand extends ContainerAwareCommand
                     "publishDate" => $publishDate->format("Y-m-d H:i:s")
                 )
             );
-            $this->recordTweet(json_encode($blogPost));
+            $this->recordTweet(json_encode($blogPost, JSON_PRETTY_PRINT));
         }
     }
 

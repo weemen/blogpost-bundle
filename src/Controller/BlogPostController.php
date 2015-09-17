@@ -100,14 +100,16 @@ class BlogPostController extends FOSRestController
     {
         $blogPostId          = $this->uuidGenerator->generate();
 
+        $requestBlogPost     = $request->request->get('blog_post');
         $command             = new CreateBlogPost();
         $command->blogPostId = $blogPostId;
-        $command->title      = $request->request->get('title');
-        $command->content    = $request->request->get('content');
-        $command->author     = $request->request->get('author');
-        $command->published  = (bool) $request->request->get('published');
-        $command->source     = $request->request->get('source');
-        $command->publishDate = $request->request->get('publishDate');
+        $command->title      = $requestBlogPost['title'];
+        $command->content    = $requestBlogPost['content'];
+        $command->author     = $requestBlogPost['author'];
+        $command->published  = $requestBlogPost['published'];
+        $command->source     = $requestBlogPost['source'];
+        $date = \DateTime::createFromFormat('Y-m-d H:i:s',$requestBlogPost['publishDate']);
+        $command->publishDate = $date->format('Y-m-d H:i:s');
         $form                = $this->formFactory->create(new BlogPostType(),$command);
 
         return $this->handleForm($request, $form, $blogPostId, $command);
