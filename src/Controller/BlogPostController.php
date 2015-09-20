@@ -87,6 +87,13 @@ class BlogPostController extends FOSRestController
         $client = new Client();
         $params['index'] = 'blogposts_published';
         $params['type']  = 'Weemen\BlogPost\ReadModel\BlogPostsPublished';
+        $params['body']['sort']  = array(
+            array(
+                "publishDate" => array(
+                    "order" => "desc"
+                )
+            )
+        );
         $results = $client->search($params);
 
         return $results['hits']['hits'];
